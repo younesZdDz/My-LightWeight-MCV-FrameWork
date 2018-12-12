@@ -6,12 +6,14 @@
     }
     public function indexAction(){
       $db=DB::getInstance();
-    //  $sql="SELECT * FROM contact";
-      $fields =[
-        "nom" =>"testInsert",
-        "prenom" => "testinsert"
-      ];
-      dnd($db->insert("contact",$fields));
+      $sql="SELECT * FROM contact";
+      $result=$db->find("contact",[
+        "conditions" => ["nom = ?", "prenom = ?"],
+        "bind" =>["Zadic", "Younes"],
+        "order" => "nom",
+        "limit" => 5
+      ]);
+      dnd($result);
       $this->view->render('home/index');
 
     }
