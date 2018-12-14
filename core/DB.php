@@ -31,7 +31,6 @@
           }
         }
 
-
         if($this->_query->execute()){
           $this->_result=$this->_query->fetchALL(PDO::FETCH_OBJ);
           $this->_count=$this->_query->rowCount();
@@ -69,9 +68,27 @@
     }
 
 
+    public function update($table,$id,$params){
+      $paramsString='';
+      $values=[];
+      if(isset($params) && !empty($params) && isset($id) && !empty($id)){
+
+        foreach ($params as $field => $value) {
+          $paramsString.=' '.$field.'=? ,';
+          $values[]=$value;
+        }
+        $values[]=$id;
+        $paramsString=trim($paramsString);
+        $paramsString=rtrim($paramsString,' ,');
+        $sql="UPDATE {$table}  SET {$paramsString} WHERE id=?";
+        return $this->query($sql,$values)->_error;
+      }
+      return false;
+    }
+
     public function delete($table,$id){
-      $sql="DELETE FROM {$table} WHERE id={$id}";
-      if(!$this->query($sql)->error){
+      $sql="DELETE FROM {$table} WHERE id= ?";
+      if(!$this->query($sql,[$id])->_error){
         return true;
       }
       return false;

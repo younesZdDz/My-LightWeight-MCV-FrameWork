@@ -5,3 +5,6 @@
     echo '</pre>';
     die();
   }
+  function sanitize($derty){
+    return htmlentities($derty,ENT_QUOTES,'UTF-8');
+  }

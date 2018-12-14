@@ -7,12 +7,7 @@
     public function indexAction(){
       $db=DB::getInstance();
       $sql="SELECT * FROM contact";
-      $result=$db->find("contact",[
-        "conditions" => ["nom = ?", "prenom = ?"],
-        "bind" =>["Zadic", "Younes"],
-        "order" => "nom",
-        "limit" => 5
-      ]);
+      $result=$db->delete("contact",1 );
       dnd($result);
       $this->view->render('home/index');
 
