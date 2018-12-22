@@ -13,14 +13,14 @@
     protected function _setTableColumns(){
       $columns=$this->get_columns();
       foreach ($columns as $column) {
-
+        $columnName=$column->Field;
         $this->_columnNames[]=$column->Field;
-        $this->{$column}=null;
+        $this->{$columnName}=null;
       }
     }
 
     public function get_columns(){
-      return $this->_db->get_columns($this->_table);
+      return $this->_db->showColumns($this->_table);
     }
 
 
@@ -57,7 +57,7 @@
     }
 
     public function findById($id){
-      return $this->findFirst(['conditions' => 'id=?', 'bind'=>[$id]])
+      return $this->findFirst(['conditions' => 'id=?', 'bind'=>[$id]]);
     }
 
     public function insert($fields){
@@ -71,10 +71,10 @@
     }
 
     public function delete($id=''){
-      if($id==''  $$ $this->id=='') return false;
+      if($id==''  && $this->id=='') return false;
       $id=($id= '') ? $this->$id : $id;
       if($this->_softDelete){
-        return $this->update($id,['deleted' => 1])
+        return $this->update($id,['deleted' => 1]);
       }
       return $this->_db->delete($this->_table,$id);
 
