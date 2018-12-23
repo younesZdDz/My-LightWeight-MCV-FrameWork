@@ -112,7 +112,7 @@
     }
 
     public function showColumns($table){
-      return $this->query('SHOW COLUMNS FROM {$table}')->results();
+      return $this->query("SHOW COLUMNS FROM {$table}")->results();
     }
 
     private function _read($table,$params){
@@ -151,7 +151,7 @@
       }
 
       $sql="SELECT * FROM {$table}{$conditionsString}{$order}{$limit}";
-      echo $sql;
+      
       if(!$this->query($sql,$bind)->_error){
         if(!count($this->_result))
           return false;
