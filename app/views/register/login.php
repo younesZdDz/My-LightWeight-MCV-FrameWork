@@ -5,6 +5,7 @@
 <?php $this->start('body') ?>
 <div class="col-md-6 offset-md-3 well">
   <form class="form" method="POST" action="">
+    <div class="bd-danger"><?= $this->displayErrors ?></div>
     <h3 class="text-center">Log In</h3>
     <div class="form-group">
       <label for="username">Username</label>

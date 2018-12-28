@@ -8,3 +8,6 @@
   function sanitize($derty){
     return htmlentities($derty,ENT_QUOTES,'UTF-8');
   }
+  function currentUser(){
+    return User::currentLoggedIn();
+  }

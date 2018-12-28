@@ -51,7 +51,9 @@
     public function findFirst($params=[]){
       $resultQuery=$this->_db->findFirst($this->_table,$params);
       $obj=new $this->_modelName($this->_table);
-      $obj->populateObjData($resultQuery);
+      if($resultQuery){
+        $obj->populateObjData($resultQuery);
+      }
       $result=$obj;
       return $result;
     }
